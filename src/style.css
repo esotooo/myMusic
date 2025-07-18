@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+
+
+.fixed {
+    @apply fixed top-0 left-0 right-0 z-50 shadow-2xl transition-all ease-in duration-300 rounded-b-2xl;
+}
+  
+.active{
+   @apply text-rose-500;
+}

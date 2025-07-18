@@ -11,14 +11,15 @@
     <link rel="stylesheet" href="./src/style.css">
   </head>
   <body>
-<header id="header">
+
+<header id="header" class="header bg-white fixed ">
   <div class="flex flex-col md:flex-row items-center justify-between mx-4 px-2 py-7">
     <div>
-      <h1 class="text-5xl font-bold flex flex-col">
+      <a href="#" class="text-5xl font-bold flex flex-col">
         Sounds<span class="text-sm text-rose-500 text-right -mt-2">By Edwin</span>
-      </h1>
+      </a>
     </div>
-    <nav class="flex flex-col md:flex-row gap-6 text-xl font-bold flex-1 justify-center">
+    <nav class="flex flex-col md:flex-row gap-6 text-xl font-bold flex-1 justify-center navbar">
       <a href="#Inicio" class="hover:text-rose-500">Inicio</a>
       <a href="#Generos" class="hover:text-rose-500">Generos</a>
       <a href="#Artistas" class="hover:text-rose-500">Artistas</a>
@@ -31,35 +32,43 @@
   </div>
 </header>
 
-    <main>
-      <section id="inicio" class="relative">
-        <div class="relative w-full h-[660px]">
+    <main class="contenido mt-26">
+
+      <section id="Inicio">
+        <div class="relative w-full h-[690px]">
           <video src="./src/videos/music.mp4" autoplay loop muted 
             class="absolute top-0 left-0 w-full h-full object-cover">
           </video>
           <div class="absolute inset-0 flex flex-col items-center justify-center" style="background-color: rgba(0,0,0,0.5);">
-            <h2 class="text-white text-4xl font-bold mb-4">Un mundo hecho de sonidos</h2>
-            <a href="#" class="text-white rounded-2xl bg-rose-500 p-3 font-bold mt-4">Ver Playlists</a>
+            <h2 class="text-white text-4xl font-bold mb-4 text-center">Un mundo hecho de sonidos</h2>
+            <a href="#Playlists" 
+              class="text-white rounded-2xl bg-rose-500 p-3 font-bold mt-4 shadow-2xl">
+            Ver Playlists
+            </a>
           </div>
         </div>
       </section>
       
 
       <!--Sección de generos-->
-      <section>
-
+      <section id="Generos" class="mt-10">
+        <h1 class="text-4xl font-bold text-center text-rose-500">Géneros</h1>
+          <div class="" id="generos"></div>
       </section>
 
       <!--Sección de Artistas-->
-      <section>
-
+      <section id="Artistas" class="mt-10">
+        <h1 class="text-4xl font-bold text-center text-rose-500">Artistas</h1>
       </section>
       
       <!--Sección de Playlists-->
-      <section>
-
+      <section id="Playlists" class="mt-10">
+        <h1 class="text-4xl font-bold text-center text-rose-500">Playlists</h1>
       </section>
+        
+
     </main>
+
     <footer>
 
     </footer>
