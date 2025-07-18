@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mi Música</title>
+    <title>Sounds By Edwin</title>
     <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     rel="stylesheet"
@@ -12,23 +12,25 @@
   </head>
   <body>
     <header id="header">
-      <div class="">
-        <h1>Sounds <span>By Edwin</span></h1>
-        <nav>
-          <a href="#Inicio">Inicio</a>
-          <a href="#Generos">Generos</a>
-          <a href="#Artistas">Artistas</a>
-          <a href="#Playlists">Playlists</a>
+      <div class="flex flex-col mx-2 px-2 justify-between py-7 md:flex-row lg:mx-17 ">
+        <div>
+          <h1 class="text-5xl font-bold">Sounds <span class="text-sm -ml-2 text-rose-500">By Edwin</span></h1>
+        </div>
+        <nav class="text-xl flex gap-4 font-bold self-center flex-col md:flex-row">
+          <a href="#Inicio" class="hover:text-rose-500">Inicio</a>
+          <a href="#Generos" class="hover:text-rose-500">Generos</a>
+          <a href="#Artistas" class="hover:text-rose-500">Artistas</a>
+          <a href="#Playlists" class="hover:text-rose-500">Playlists</a>
         </nav>
-        <nav>
+        <nav class="text-3xl flex gap-4 self-center">
           <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          <a href=""><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
         </nav>
       </div>
     </header>
     <main>
-      <section>
-
+      <section class="">
+        <video src="./src/videos/music.mp4" autoplay loop muted class=""></video>
       </section>
 
       <!--Sección de generos-->
