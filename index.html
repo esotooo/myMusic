@@ -8,33 +8,38 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     rel="stylesheet"
     />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <link rel="stylesheet" href="./src/style.css">
   </head>
   <body>
 
-<header id="header" class="header bg-white fixed ">
-  <div class="flex flex-col md:flex-row items-center justify-between mx-4 px-2 py-7">
-    <div>
-      <a href="#" class="text-5xl font-bold flex flex-col">
-        Sounds<span class="text-sm text-rose-500 text-right -mt-2">By Edwin</span>
-      </a>
-    </div>
-    <nav class="flex flex-col md:flex-row gap-6 text-xl font-bold flex-1 justify-center navbar">
-      <a href="#Inicio" class="hover:text-rose-500">Inicio</a>
-      <a href="#Generos" class="hover:text-rose-500">Géneros</a>
-      <a href="#Artistas" class="hover:text-rose-500">Albums</a>
-      <a href="#Playlists" class="hover:text-rose-500">Playlists</a>
-    </nav>
-    <nav class="flex gap-6 text-3xl">
-      <a href="#"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#"><i class="fa-brands fa-facebook"></i></a>
-    </nav>
-  </div>
-</header>
+    <header id="header" class="header bg-white fixed py-7 shadow-md z-50 w-full">
+      <div class="flex flex-col md:flex-row items-center justify-between mx-4 px-2">
+        <div>
+          <a href="#" class="text-5xl font-bold flex flex-col">
+            Sounds<span class="text-sm text-rose-500 text-right -mt-2">By Edwin</span>
+          </a>
+        </div>
+        <nav class="flex flex-col md:flex-row gap-6 text-xl font-bold flex-1 justify-center navbar">
+          <a href="#Inicio" class="hover:text-rose-500">Inicio</a>
+          <a href="#Generos" class="hover:text-rose-500">Géneros</a>
+          <a href="#Albums" class="hover:text-rose-500">Albums</a>
+          <a href="#Playlists" class="hover:text-rose-500">Playlists</a>
+        </nav>
+        <nav class="flex gap-6 text-3xl">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        </nav>
+      </div>
+    </header>
+    
 
     <main class="contenido mt-26">
 
-      <section id="Inicio">
+      <section id="Inicio" class="scroll-mt-28">
         <div class="relative w-full h-[690px]">
           <video src="./src/videos/music.mp4" autoplay loop muted 
             class="absolute top-0 left-0 w-full h-full object-cover">
@@ -50,21 +55,24 @@
       </section>
 
       <!--Sección de generos-->
-      <section id="Generos" class="mt-10 mx-10">
+      <section id="Generos" class="mt-10 mx-10 scroll-mt-35">
         <h1 class="text-4xl font-bold text-center text-rose-500">Géneros</h1>
-        <p class="text-xl my-3">A continuación encontrarás mis géneros musicales favoritos.</p>
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3" id="generos">
+        <p class="text-xl my-6 mx-2">A continuación encontrarás mis géneros musicales favoritos.</p>
+          <div class="grid grid-cols-1 gap-x-4  md:grid-cols-2 lg:grid-cols-3" id="generos">
               <!--Aqui se generá el DIV con cada género-->
           </div>
       </section>
 
       <!--Sección de Albums-->
-      <section id="Albums" class="mt-10">
-        <h1 class="text-4xl font-bold text-center text-rose-500">Albums</h1>
+      <section id="Albums" class="mt-10 scroll-mt-28">
+        <h1 class="text-4xl font-bold text-center text-rose-500">Álbums</h1>
+        
+
+
       </section>
       
       <!--Sección de Playlists-->
-      <section id="Playlists" class="mt-10">
+      <section id="Playlists" class="mt-10 scroll-mt-28">
         <h1 class="text-4xl font-bold text-center text-rose-500">Playlists</h1>
       </section>
         

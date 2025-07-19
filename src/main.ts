@@ -4,11 +4,12 @@ document.addEventListener('DOMContentLoaded', function(){
   generosMostrar()
   scroll()
   resaltar()
+  animarTarjetas()
 })
 
 
-
 function scroll(){
+  
   const links = document.querySelectorAll('.navbar a')
   links.forEach( link => {
       link.addEventListener('click', e => {
@@ -51,23 +52,82 @@ function resaltar(){
   })   
 }
 
-function generosMostrar(){
+
+function generosMostrar() {
   const tarjeta = document.querySelector<HTMLDivElement>('#generos')
-  if (!tarjeta) return;
-  
-  generos.forEach( genero => {
+  if (!tarjeta) return
+
+  generos.forEach(genero => {
     const item = document.createElement('DIV')
+    item.classList.add(
+      'cursor-pointer',
+      '[perspective:1000px]',
+      'mb-4'
+    )
+
+    const artistasHTML = genero.artistas.map(artista => `
+      <li class="text-xs font-light">${artista}</li>
+    `).join('')
+    
     item.innerHTML = `
-      <div class="relative h-full bg-gray-300 py-10 px-4 rounded-lg cursor-pointer slide">
-        <div class="absolute flex items-center justify-center w-full h-ful py-1 px-0">
-          <img src="${genero.imagen}" alt="Icono genero" class="w-25 h-25 opacity-10" loading="lazy">
-        </div>
-        <div class="relative">
-          <h3 class="text-lg font-black text-rose-500">${genero.titulo}</h3>
-          <p class="text-md py-3">${genero.resumen}</p>
+      <div class="tarjeta w-full aspect-[3.5/3] lg:aspect-[5/3]">
+        <div class="tarjeta__inner w-full h-full relative">
+          <div class="tarjeta__cara tarjeta__cara--frontal rounded-2xl absolute inset-0 w-full h-full">
+            <!-- Cara frontal -->
+            <div class="frontal--contenido p-15 w-full h-full">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <img src="${genero.imagen}" alt="Icono genero" class="w-24 h-24 opacity-10 object-contain" loading="lazy" />
+              </div>
+              <div>
+                <h3 class="text-lg font-black text-rose-500">${genero.titulo}</h3>
+                <p class="text-md py-3">${genero.resumen}</p>
+              </div>
+            </div>
+          </div>
+          <div class="tarjeta__cara tarjeta__cara--trasera absolute inset-0 w-full h-full rounded-2xl">
+            <!-- Cara trasera -->
+            <div class="bg-rose-500 w-full h-full py-8 px-10">
+              <p class="font-bold text-2xl">Artistas Favoritos</p>
+              <ul class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 mt-2">
+                ${artistasHTML}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     `
-  tarjeta.appendChild(item)
+    
+    tarjeta.appendChild(item)
+
+    item.addEventListener('click', () => {
+      const card = item.querySelector('.tarjeta__inner')
+      card?.classList.toggle('is-flipped')
+    })
   })
 }
+
+function animarTarjetas() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0')
+        entry.target.classList.add(
+          'animate__animated',
+          'animate__fadeInUp'
+        )
+        observer.unobserve(entry.target)
+      }
+    })
+  }, {
+    threshold: 0.5
+  })
+
+  document.querySelectorAll('.tarjeta').forEach(tarjeta => {
+    observer.observe(tarjeta)
+  })
+}
+
+
+
+
+
