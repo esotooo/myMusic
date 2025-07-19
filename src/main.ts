@@ -58,8 +58,15 @@ function generosMostrar(){
   generos.forEach( genero => {
     const item = document.createElement('DIV')
     item.innerHTML = `
-      <img src="" alt="imagen genero"></img>
-      Nombre: ${genero.titulo}
+      <div class="relative h-full bg-gray-300 py-10 px-4 rounded-lg cursor-pointer slide">
+        <div class="absolute flex items-center justify-center w-full h-ful py-1 px-0">
+          <img src="${genero.imagen}" alt="Icono genero" class="w-25 h-25 opacity-10" loading="lazy">
+        </div>
+        <div class="relative">
+          <h3 class="text-lg font-black text-rose-500">${genero.titulo}</h3>
+          <p class="text-md py-3">${genero.resumen}</p>
+        </div>
+      </div>
     `
   tarjeta.appendChild(item)
   })
