@@ -1,108 +1,182 @@
 @import "tailwindcss";
 @import 'animate.css';
-@import 'swiper/css';
-@import 'swiper/css/pagination';
-@import 'swiper/css/effect-coverflow';
 
-
+/* =============================
+   Variables globales
+============================= */
 :root {
 	--tst: bottom 0.5s ease 0s;
 	--dark: #E6E6E6EE;
 }
 
+/* =============================
+   Estados globales
+============================= */
+
+/* Header fijo */
 .fixed {
     @apply fixed top-0 left-0 right-0 z-50 shadow-2xl transition-all ease-in duration-300 rounded-b-2xl;
 }
-  
-.active{
+
+/* Link activo */
+.active {
    @apply text-rose-500 underline;
 }
 
+/* =============================
+   Componente: Tarjeta animada
+============================= */
 
-.tarjeta__inner{
+/* Contenedor interior con efecto flip */
+.tarjeta__inner {
     transition: transform 1s;
     transform-style: preserve-3d;
     cursor: pointer;
     position: relative;
 }
 
-.tarjeta__inner.is-flipped{
+/* Estado: tarjeta volteada */
+.tarjeta__inner.is-flipped {
     transform: rotateX(180deg);
 }
 
-.tarjeta__cara{
+/* Caras de la tarjeta */
+.tarjeta__cara {
     position: absolute;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     overflow: hidden;
-    border-radius: 16;
+    border-radius: 16px;
     box-shadow: 0px 3px 18px 3px rgba(0,0,0,0.2);
 }
 
-.tarjeta__cara--frontal{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Cara frontal */
+.tarjeta__cara--frontal {
+    @apply flex items-center justify-center;
 }
 
-.tarjeta__cara--trasera{
+/* Cara trasera */
+.tarjeta__cara--trasera {
     transform: rotateX(180deg);
 }
+
+/* =============================
+   SwiperJS: Carrusel
+============================= */
+
+/* Contenedor Swiper */
 .swiper {
 	width: 100%;
 	padding-top: 50px;
 	padding-bottom: 50px;
 }
 
+/* Slide individual */
 .swiper-slide {
 	background-position: center;
 	background-size: cover;
-	width: 500px;
-    aspect-ratio: 1 / 1;
+	width: 600;
+	aspect-ratio: 1 / 1;
 	border-radius: 10px;
 	overflow: hidden;
+	margin-bottom: 50px;
 }
-.swiper-pagination {
-	bottom: 10px !important;
-	position: absolute;
-	width: 100%;
-	text-align: center;
-	z-index: 10;
-  }
-  
-  .swiper-pagination-bullet {
-	background-color: white !important;
-	opacity: 1 !important;
-  }
-  
-  .swiper-pagination-bullet-active {
-	background-color: #ffc107 !important;
-  }
-  
 
+/* Paginación bullets */
+.swiper-pagination-bullet {
+	background: white;
+	transition: all 0.5s ease 0s;
+	border-radius: 8px;
+}
+
+/* Bullet activo */
+.swiper-pagination-bullet-active {
+	@apply bg-rose-500 scale-175 px-1.5;
+}
+
+/* =============================
+   Overlay de información
+============================= */
+
+/* Caja de información sobre la slide */
 .info {
 	position: absolute;
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-	/*bottom: -1px;*/
-	width: calc(100% + 2px);
-	height: calc(50% + 2px);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: 0.25rem; 
+	width: 100%;
+	height: 50%;
 	background: linear-gradient(180deg, #fff0 0, #0008 50px), linear-gradient(180deg, #fff0 , #0009);
 	padding: 15px;
-	padding-top: 65px;
-	left: calc(-100% - 3px);
+	padding-top: -20px;
 	left: 0;
-	bottom: calc(-100% - 3px);
+	bottom: -100%;
 	box-sizing: border-box;
 	transition: var(--tst);
 }
+@media screen and (max-width: 768px) {
+	.info {
+		height: 60%;
+	}
+	.swiper-slide-active .info {
+		height: 75%;
+		background: linear-gradient(180deg, #fff0 0, #0008 50px), linear-gradient(180deg, #fff0 , #0009);
+	}
+}
 
+/*Aumentando el tamaño de cada album al momento de estar activo y dismuyendo los anteriores y siguientes*/
+.swiper-slide {
+    scale      : .9;
+    transition : scale 250ms ease-in-out;
+
+    &.swiper-slide-active {
+      scale   : 1.2;
+      z-index : 10;
+	}
+
+    &.swiper-slide-prev,
+    &.swiper-slide-next {
+      scale               : 1;
+      z-index             : 5;
+      transition-duration : 150ms;
+    }
+    
+    &.swiper-slide-next + & {
+      z-index : 2;
+    }
+  }
+
+@media screen and (max-width: 768px) {
+	.swiper-slide {
+		scale      : .9;
+		transition : scale 250ms ease-in-out;
+	
+		&.swiper-slide-active {
+		  scale   : 1;
+		  z-index : 10;
+		}
+	
+		&.swiper-slide-prev,
+		&.swiper-slide-next {
+		  scale               : .8;
+		  z-index             : 5;
+		  transition-duration : 150ms;
+		}
+		
+		&.swiper-slide-next + & {
+		  z-index : 2;
+		}
+	  }
+}
+
+/* Estado activo: la info sube */
 .swiper-slide-active .info {
 	bottom: 0;
 	transition: var(--tst);
 }
 
-
+/* Decoradores en spans de la info */
 .info span:before,
 .info span:after {
 	content: "";
@@ -113,4 +187,32 @@
 	max-width: 2em;
 }
 
+/* =============================
+   Botones de navegación Swiper
+============================= */
 
+.swiper-button-prev,
+.swiper-button-next {
+	font-weight: 600;
+	overflow: hidden;
+	color: black;
+	cursor: pointer;
+	box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+	transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+	padding: 2.3rem;
+	border-radius: 50%;
+	color: white;
+	font-weight: bold;
+	box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.5),
+				inset -1px -1px 1px 1px rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(3px);
+	isolation: isolate;
+	z-index: 3;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover{
+	padding: 2.5rem;
+	border-radius: 45%;
+}

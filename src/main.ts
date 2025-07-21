@@ -1,10 +1,7 @@
 import { generos } from "./db/generos";
 import { Albums } from "./db/albums";
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
-
-
-
+import { Navigation, Pagination } from 'swiper/modules'; //Modulos necesarios para que navigation y pagination funcionen
 
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -16,10 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 
-
-
 function scroll(){
-  
   const links = document.querySelectorAll('a')
   links.forEach( link => {
       link.addEventListener('click', e => {
@@ -153,18 +147,21 @@ function inicializarCarrusel() {
         <span class="text-3xl font-extrabold text-white m-0">${album.nombre}</span>
         <span class="text-white font-bold italic text-lg m-0">${album.artista}</span>
         <span class="text-rose-500 text-md font-bold m-0">${album.año}</span>
+        <div class="flex gap-3 content-center">
+          <span><a href="#" class="text-white text-3xl hover:text-rose-500"><i class="fa-brands fa-spotify"></i></a></span>
+          <span><a href="#" class="text-white text-3xl hover:text-rose-500"><i class="fa-brands fa-apple"></i></a></span>
+          <span><a href="#" class="text-white text-3xl hover:text-rose-500"><i class="fa-brands fa-deezer"></i></a></span>
+          <span><a href="#" class="text-white text-3xl hover:text-rose-500"><i class="fa-brands fa-soundcloud"></i></a></span>
+        </div>
       </div>
       
-    `;
+    `
     tarjeta.appendChild(item)
-
-    
   })
-
 
   // Inicializar Swiper
   const swiper = new Swiper(".swiper", {
-    modules: [Navigation, Pagination],
+    modules: [Navigation, Pagination], //Aqui declaramos ambos modulos
     effect: "coverflow",
     loop: true,
     grabCursor: true,
@@ -194,9 +191,10 @@ function inicializarCarrusel() {
       1200: { slidesPerView: 4 },
       1400: { slidesPerView: 4.5 },
     },
-    
   })
 }
+
+function
 
 
 

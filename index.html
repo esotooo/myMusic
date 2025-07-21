@@ -69,27 +69,32 @@
       <!--Sección de Albums-->
       <section id="Albums" class="mt-10 scroll-mt-28 bg-black pt-10 pb-30">
         <h1 class="text-4xl font-bold text-center text-rose-500">Álbums</h1>
+        <p class="text-gray-400 font-bold text-center mt-3">Álbums Recomendados</p>
         <div class="swiper mt-8">
           <div class="swiper-wrapper" id="albums">
             <!--Aqui se generá el DIV con cada álbum-->
           </div>
           <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
         </div>
       </section>
-      
-
-      
       
       <!--Sección de Playlists-->
       <section id="Playlists" class="mt-10 scroll-mt-28">
         <h1 class="text-4xl font-bold text-center text-rose-500">Playlists</h1>
+        <div id="playlists">
+          <!--Aqui se generá el DIV con cada Playlist-->
+        </div>
       </section>
         
 
     </main>
 
-    <footer>
-
+    <footer class="bg-rose-500 py-10"> 
+      <div class="mx-10">
+        <h1>Todos los derechos reservados</h1>
+      </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="/src/main.ts"></script>
