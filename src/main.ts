@@ -1,6 +1,10 @@
 import { generos } from "./db/generos";
 import { Albums } from "./db/albums";
-import {Swiper} from 'swiper';
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
+
+
+
 
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -136,26 +140,31 @@ function animarGeneros() {
 
 
 function inicializarCarrusel() {
-  const tarjeta = document.querySelector<HTMLDivElement>("#albums");
-  if (!tarjeta) return;
+  const tarjeta = document.querySelector<HTMLDivElement>("#albums")
+  if (!tarjeta) return
 
   // Agregar los albums al DOM
   Albums.forEach(album => {
-    const item = document.createElement('DIV');
-    item.classList.add('swiper-slide');
-    item.style.backgroundImage = `url('${album.imagen}')`;
+    const item = document.createElement('DIV')
+    item.classList.add('swiper-slide')
+    item.style.backgroundImage = `url('${album.imagen}')`
     item.innerHTML = `
       <div class="info">
         <span class="text-3xl font-extrabold text-white m-0">${album.nombre}</span>
         <span class="text-white font-bold italic text-lg m-0">${album.artista}</span>
         <span class="text-rose-500 text-md font-bold m-0">${album.año}</span>
       </div>
+      
     `;
-    tarjeta.appendChild(item);
-  });
+    tarjeta.appendChild(item)
+
+    
+  })
+
 
   // Inicializar Swiper
   const swiper = new Swiper(".swiper", {
+    modules: [Navigation, Pagination],
     effect: "coverflow",
     loop: true,
     grabCursor: true,
@@ -170,6 +179,12 @@ function inicializarCarrusel() {
     },
     pagination: {
       el: ".swiper-pagination",
+      type: "bullets",
+      clickable: true
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
     breakpoints: {
       320: { slidesPerView: 1.5 },
@@ -179,7 +194,8 @@ function inicializarCarrusel() {
       1200: { slidesPerView: 4 },
       1400: { slidesPerView: 4.5 },
     },
-  });
+    
+  })
 }
 
 

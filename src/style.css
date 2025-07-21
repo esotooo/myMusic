@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @import 'animate.css';
 @import 'swiper/css';
-@import 'swiper/css/effect-coverflow';
 @import 'swiper/css/pagination';
+@import 'swiper/css/effect-coverflow';
+
 
 :root {
 	--tst: bottom 0.5s ease 0s;
@@ -61,16 +62,23 @@
 	border-radius: 10px;
 	overflow: hidden;
 }
-
-.swiper-pagination-bullet {
-	background: #696969;
-	transition: all 0.5s ease 0s;
-	border-radius: 8px;
-}
-
-.swiper-pagination-bullet-active {
-	background: #ffc107;
-}
+.swiper-pagination {
+	bottom: 10px !important;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	z-index: 10;
+  }
+  
+  .swiper-pagination-bullet {
+	background-color: white !important;
+	opacity: 1 !important;
+  }
+  
+  .swiper-pagination-bullet-active {
+	background-color: #ffc107 !important;
+  }
+  
 
 .info {
 	position: absolute;
