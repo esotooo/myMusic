@@ -1,16 +1,22 @@
 import { generos } from "./db/generos";
+import { Albums } from "./db/albums";
+import {Swiper} from 'swiper';
+
 
 document.addEventListener('DOMContentLoaded', function(){
   generosMostrar()
   scroll()
   resaltar()
-  animarTarjetas()
+  animarGeneros()
+  inicializarCarrusel()
 })
+
+
 
 
 function scroll(){
   
-  const links = document.querySelectorAll('.navbar a')
+  const links = document.querySelectorAll('a')
   links.forEach( link => {
       link.addEventListener('click', e => {
           e.preventDefault() //Eliminamos la accion por defecto
@@ -52,7 +58,7 @@ function resaltar(){
   })   
 }
 
-
+//Funcion para generar una tarjeta para cada genero
 function generosMostrar() {
   const tarjeta = document.querySelector<HTMLDivElement>('#generos')
   if (!tarjeta) return
@@ -88,7 +94,7 @@ function generosMostrar() {
             <!-- Cara trasera -->
             <div class="bg-rose-500 w-full h-full py-8 px-10">
               <p class="font-bold text-2xl">Artistas Favoritos</p>
-              <ul class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 mt-2">
+              <ul class="grid grid-cols-2 mt-2">
                 ${artistasHTML}
               </ul>
             </div>
@@ -106,7 +112,8 @@ function generosMostrar() {
   })
 }
 
-function animarTarjetas() {
+//Funcion para animar la entrada de las tarjetas al hacer scroll
+function animarGeneros() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -126,6 +133,56 @@ function animarTarjetas() {
     observer.observe(tarjeta)
   })
 }
+
+
+function inicializarCarrusel() {
+  const tarjeta = document.querySelector<HTMLDivElement>("#albums");
+  if (!tarjeta) return;
+
+  // Agregar los albums al DOM
+  Albums.forEach(album => {
+    const item = document.createElement('DIV');
+    item.classList.add('swiper-slide');
+    item.style.backgroundImage = `url('${album.imagen}')`;
+    item.innerHTML = `
+      <div class="info">
+        <span class="text-3xl font-extrabold text-white m-0">${album.nombre}</span>
+        <span class="text-white font-bold italic text-lg m-0">${album.artista}</span>
+        <span class="text-rose-500 text-md font-bold m-0">${album.año}</span>
+      </div>
+    `;
+    tarjeta.appendChild(item);
+  });
+
+  // Inicializar Swiper
+  const swiper = new Swiper(".swiper", {
+    effect: "coverflow",
+    loop: true,
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 1,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+    },
+    breakpoints: {
+      320: { slidesPerView: 1.5 },
+      580: { slidesPerView: 2 },
+      767: { slidesPerView: 3 },
+      992: { slidesPerView: 3.5 },
+      1200: { slidesPerView: 4 },
+      1400: { slidesPerView: 4.5 },
+    },
+  });
+}
+
+
 
 
 

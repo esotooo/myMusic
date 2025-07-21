@@ -1,14 +1,20 @@
 @import "tailwindcss";
 @import 'animate.css';
+@import 'swiper/css';
+@import 'swiper/css/effect-coverflow';
+@import 'swiper/css/pagination';
 
-
+:root {
+	--tst: bottom 0.5s ease 0s;
+	--dark: #E6E6E6EE;
+}
 
 .fixed {
     @apply fixed top-0 left-0 right-0 z-50 shadow-2xl transition-all ease-in duration-300 rounded-b-2xl;
 }
   
 .active{
-   @apply text-rose-500;
+   @apply text-rose-500 underline;
 }
 
 
@@ -41,11 +47,62 @@
 .tarjeta__cara--trasera{
     transform: rotateX(180deg);
 }
+.swiper {
+	width: 100%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.swiper-slide {
+	background-position: center;
+	background-size: cover;
+	width: 500px;
+    aspect-ratio: 1 / 1;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.swiper-pagination-bullet {
+	background: #696969;
+	transition: all 0.5s ease 0s;
+	border-radius: 8px;
+}
+
+.swiper-pagination-bullet-active {
+	background: #ffc107;
+}
+
+.info {
+	position: absolute;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+	/*bottom: -1px;*/
+	width: calc(100% + 2px);
+	height: calc(50% + 2px);
+	background: linear-gradient(180deg, #fff0 0, #0008 50px), linear-gradient(180deg, #fff0 , #0009);
+	padding: 15px;
+	padding-top: 65px;
+	left: calc(-100% - 3px);
+	left: 0;
+	bottom: calc(-100% - 3px);
+	box-sizing: border-box;
+	transition: var(--tst);
+}
+
+.swiper-slide-active .info {
+	bottom: 0;
+	transition: var(--tst);
+}
 
 
-
-
-
-
+.info span:before,
+.info span:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	max-width: 2em;
+}
 
 

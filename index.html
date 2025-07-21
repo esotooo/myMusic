@@ -19,19 +19,18 @@
     <header id="header" class="header bg-white fixed py-7 shadow-md z-50 w-full">
       <div class="flex flex-col md:flex-row items-center justify-between mx-4 px-2">
         <div>
-          <a href="#" class="text-5xl font-bold flex flex-col">
+          <a href="#Inicio" class="text-5xl font-bold flex flex-col">
             Sounds<span class="text-sm text-rose-500 text-right -mt-2">By Edwin</span>
           </a>
         </div>
         <nav class="flex flex-col md:flex-row gap-6 text-xl font-bold flex-1 justify-center navbar">
-          <a href="#Inicio" class="hover:text-rose-500">Inicio</a>
           <a href="#Generos" class="hover:text-rose-500">Géneros</a>
           <a href="#Albums" class="hover:text-rose-500">Albums</a>
           <a href="#Playlists" class="hover:text-rose-500">Playlists</a>
         </nav>
         <nav class="flex gap-6 text-3xl">
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="hover:text-rose-500"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="hover:text-rose-500"><i class="fa-brands fa-facebook"></i></a>
         </nav>
       </div>
     </header>
@@ -64,12 +63,16 @@
       </section>
 
       <!--Sección de Albums-->
-      <section id="Albums" class="mt-10 scroll-mt-28">
+      <section id="Albums" class="mt-10 scroll-mt-28 bg-black pt-10 pb-30">
         <h1 class="text-4xl font-bold text-center text-rose-500">Álbums</h1>
-        
-
-
+        <div class="swiper mt-8">
+          <div class="swiper-wrapper" id="albums">
+            <!--Aqui se generá el DIV con cada álbum-->
+          </div>
+        <div class="swiper-pagination"></div>
       </section>
+
+      
       
       <!--Sección de Playlists-->
       <section id="Playlists" class="mt-10 scroll-mt-28">
