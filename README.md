@@ -79,11 +79,9 @@ npm run dev
 
 ---
 
-## Capturas
-
----
-
 ## Autor
+
+- Edwin Soto
 
 ---
 
