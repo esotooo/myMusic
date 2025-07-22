@@ -230,24 +230,28 @@ function generarPlaylists(){
 }
 
 function setupMobileMenu() {
-  const menuToggle = document.getElementById('menu-toggle')
-  const menuClose = document.getElementById('menu-close')
-  const mobileMenu = document.getElementById('mobile-menu')
+  const menuToggle : HTMLElement | null = document.getElementById('menu-toggle')
+  const menuClose : HTMLElement | null = document.getElementById('menu-close')
+  const mobileMenu: HTMLElement | null = document.getElementById('mobile-menu')
 
   function openMenu() {
+    if(!mobileMenu) return
     mobileMenu.classList.remove('hidden')
     document.body.style.overflow = 'hidden'
   }
 
   function closeMenu() {
+    if(!mobileMenu) return
     mobileMenu.classList.add('hidden')
     document.body.style.overflow = ''
   }
 
+  if(!menuToggle || !menuClose || !mobileMenu) return
   menuToggle.addEventListener('click', openMenu)
   menuClose.addEventListener('click', closeMenu)
 
   // Cerrar menú al hacer clic en cualquier enlace del menú móvil (incluye redes sociales)
+
   const enlaces = mobileMenu.querySelectorAll('a')
   enlaces.forEach(enlace => {
     enlace.addEventListener('click', closeMenu)
