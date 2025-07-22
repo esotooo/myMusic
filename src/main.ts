@@ -185,8 +185,8 @@ function generarPlaylists() {
         <img src="${playlist.portada}" alt="Portada playlist" class="absolute inset-0 w-full h-full object-cover" />
         <div class="relative z-10 flex flex-col justify-end h-full p-4 bg-gradient-to-t from-black/70 to-transparent">
           <h3 class="text-white font-bold text-3xl mb-2">${playlist.nombre}</h3>
-          <a href="#" class="inline-block mt-2 px-4 py-2 rounded-xl text-white text-center font-bold cursor-pointer bg-black/40 backdrop-blur-sm hover:bg-black/60">
-            Escuchar
+          <a href="${playlist.url}" class="inline-flex items-center mt-2 px-4 py-2 rounded-xl text-white text-center font-bold cursor-pointer bg-black/40 backdrop-blur-sm hover:bg-black/60">
+            <i class="fa-brands fa-apple mr-2"></i> Escuchar
           </a>
         </div>
       </div>
@@ -212,12 +212,6 @@ function inicializarCarrusel() {
         <span class="text-3xl font-extrabold text-white m-0">${album.nombre}</span>
         <span class="text-white font-bold italic text-lg m-0">${album.artista}</span>
         <span class="text-rose-500 text-md font-bold m-0">${album.año}</span>
-        <div class="flex gap-3 content-center">
-          <span><a href="#" class="text-white text-3xl hover:text-rose-500"><i class="fa-brands fa-spotify"></i></a></span>
-          <span><a href="#" class="text-white text-3xl hover:text-rose-500"><i class="fa-brands fa-apple"></i></a></span>
-          <span><a href="#" class="text-white text-3xl hover:text-rose-500"><i class="fa-brands fa-deezer"></i></a></span>
-          <span><a href="#" class="text-white text-3xl hover:text-rose-500"><i class="fa-brands fa-soundcloud"></i></a></span>
-        </div>
       </div>
     `
     contenedor.appendChild(item)
