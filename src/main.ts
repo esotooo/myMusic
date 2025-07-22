@@ -1,88 +1,105 @@
-import { generos } from "./db/generos";
-import { Albums } from "./db/albums";
-import { Playlists } from "./db/playlist";
-import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules'; //Modulos necesarios para que navigation y pagination funcionen
+import { generos } from "./db/generos"
+import { Albums } from "./db/albums"
+import { Playlists } from "./db/playlist"
+import Swiper from 'swiper'
+import { Navigation, Pagination } from 'swiper/modules' // Módulos necesarios para navegación y paginación
 
-
-document.addEventListener('DOMContentLoaded', function(){
+// -------------------------------
+// Inicialización principal al cargar DOM
+// -------------------------------
+document.addEventListener('DOMContentLoaded', () => {
   menuMovil()
   generosMostrar()
-  scroll()
-  resaltar()
+  scrollSmooth()
+  resaltarSeccionActual()
   animarGeneros()
   inicializarCarrusel()
   generarPlaylists()
-  añoActual()
+  actualizarAnioActual()
   initDarkMode()
 })
 
 
-function scroll(){
+// -------------------------------
+// Funciones de navegación y scroll
+// -------------------------------
+
+/**
+ * Aplica scroll suave a todos los enlaces <a> del documento.
+ */
+function scrollSmooth() {
   const links = document.querySelectorAll('a')
-  links.forEach( link => {
-      link.addEventListener('click', e => {
-          e.preventDefault() //Eliminamos la accion por defecto
-          const target = e.target as HTMLAnchorElement | null
-          if(!target) return
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault()
+      const target = e.target as HTMLAnchorElement | null
+      if (!target) return
 
-          const sectionScroll = target.getAttribute('href')
-          if(!sectionScroll) return
+      const sectionScroll = target.getAttribute('href')
+      if (!sectionScroll) return
 
-          const section = document.querySelector(sectionScroll)
-          if(section){
-            section.scrollIntoView({behavior: 'smooth'})
-          }
-      })
+      const section = document.querySelector(sectionScroll)
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' })
+      }
+    })
   })
 }
 
-function resaltar(){
-  document.addEventListener('scroll', function(){
-      const sections = document.querySelectorAll('section')
-      const links = document.querySelectorAll('.navbar a')
+/**
+ * Resalta el link de navegación correspondiente a la sección visible al hacer scroll.
+ */
+function resaltarSeccionActual() {
+  document.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section')
+    const links = document.querySelectorAll('.navbar a')
 
-      let actual = ''
-      //Medimos la distancia de cada section y una vez lo pase se coloque el nuevo
-      sections.forEach(section => {
-          const sectionTop = section.offsetTop
-          const sectionHeight = section.clientHeight
-          if(window.scrollY >= (sectionTop - sectionHeight / 3) ){
-              actual = section.id
-          }
-      })
-      //Una vez pasada la seccion, que el link activo se resalte de otro color 
-      links.forEach(link => {
-          link.classList.remove('active')
-          if(link.getAttribute('href') === '#' +  actual){ 
-              link.classList.add('active')
-          }
-      })
-  })   
+    let actual = ''
+
+    // Detectar la sección actual basada en scrollY
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop
+      const sectionHeight = section.clientHeight
+      if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+        actual = section.id
+      }
+    })
+
+    // Resaltar el link activo
+    links.forEach(link => {
+      link.classList.remove('active')
+      if (link.getAttribute('href') === '#' + actual) {
+        link.classList.add('active')
+      }
+    })
+  })
 }
 
-//Funcion para generar una tarjeta para cada genero
+
+// -------------------------------
+// Funciones para mostrar contenido dinámico
+// -------------------------------
+
+/**
+ * Genera las tarjetas para cada género musical usando datos importados.
+ * Añade evento para girar tarjeta al hacer clic.
+ */
 function generosMostrar() {
-  const tarjeta = document.querySelector<HTMLDivElement>('#generos')
-  if (!tarjeta) return
+  const contenedor = document.querySelector<HTMLDivElement>('#generos')
+  if (!contenedor) return
 
   generos.forEach(genero => {
-    const item = document.createElement('DIV')
-    item.classList.add(
-      'cursor-pointer',
-      '[perspective:1000px]',
-      'mb-4'
-    )
+    const item = document.createElement('div')
+    item.classList.add('cursor-pointer', '[perspective:1000px]', 'mb-4')
 
     const artistasHTML = genero.artistas.map(artista => `
       <li class="text-xs font-light">${artista}</li>
     `).join('')
-    
+
     item.innerHTML = `
       <div class="tarjeta w-full aspect-[3.5/3] lg:aspect-[5/3]">
         <div class="tarjeta__inner w-full h-full relative">
           <div class="tarjeta__cara tarjeta__cara--frontal rounded-2xl absolute inset-0 w-full h-full">
-            <!-- Cara frontal -->
             <div class="frontal--contenido p-15 w-full h-full">
               <div class="absolute inset-0 flex items-center justify-center">
                 <img src="${genero.imagen}" alt="Icono genero" class="w-24 h-24 opacity-10 object-contain" loading="lazy" />
@@ -94,20 +111,18 @@ function generosMostrar() {
             </div>
           </div>
           <div class="tarjeta__cara tarjeta__cara--trasera absolute inset-0 w-full h-full rounded-2xl">
-            <!-- Cara trasera -->
             <div class="bg-rose-500 w-full h-full py-8 px-10">
               <p class="font-bold text-2xl">Artistas Favoritos</p>
-              <ul class="grid grid-cols-2 mt-2">
-                ${artistasHTML}
-              </ul>
+              <ul class="grid grid-cols-2 mt-2">${artistasHTML}</ul>
             </div>
           </div>
         </div>
       </div>
     `
-    
-    tarjeta.appendChild(item)
 
+    contenedor.appendChild(item)
+
+    // Evento para girar tarjeta
     item.addEventListener('click', () => {
       const card = item.querySelector('.tarjeta__inner')
       card?.classList.toggle('is-flipped')
@@ -115,36 +130,59 @@ function generosMostrar() {
   })
 }
 
-//Funcion para animar la entrada de las tarjetas al hacer scroll
+/**
+ * Anima las tarjetas de géneros al entrar en viewport con Intersection Observer.
+ */
 function animarGeneros() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.remove('opacity-0')
-        entry.target.classList.add(
-          'animate__animated',
-          'animate__fadeInUp'
-        )
+        entry.target.classList.add('animate__animated', 'animate__fadeInUp')
         observer.unobserve(entry.target)
       }
     })
-  }, {
-    threshold: 0.5
-  })
+  }, { threshold: 0.5 })
 
   document.querySelectorAll('.tarjeta').forEach(tarjeta => {
     observer.observe(tarjeta)
   })
 }
 
+/**
+ * Genera las tarjetas para las playlists dinámicamente.
+ */
+function generarPlaylists() {
+  const contenedor = document.querySelector<HTMLDivElement>('#playlists')
+  if (!contenedor) return
 
+  Playlists.forEach(playlist => {
+    const item = document.createElement('div')
+    item.innerHTML = `
+      <div class="relative w-full h-64 rounded-xl overflow-hidden">
+        <img src="${playlist.portada}" alt="Portada playlist" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="relative z-10 flex flex-col justify-end h-full p-4 bg-gradient-to-t from-black/70 to-transparent">
+          <h3 class="text-white font-bold text-3xl mb-2">${playlist.nombre}</h3>
+          <a href="#" class="inline-block mt-2 px-4 py-2 rounded-xl text-white text-center font-bold cursor-pointer bg-black/40 backdrop-blur-sm">
+            Escuchar
+          </a>
+        </div>
+      </div>
+    `
+    contenedor.appendChild(item)
+  })
+}
+
+/**
+ * Inicializa el carrusel Swiper con los álbumes.
+ */
 function inicializarCarrusel() {
-  const tarjeta = document.querySelector<HTMLDivElement>("#albums")
-  if (!tarjeta) return
+  const contenedor = document.querySelector<HTMLDivElement>("#albums")
+  if (!contenedor) return
 
-  // Agregar los albums al DOM
+  // Añade cada álbum al DOM
   Albums.forEach(album => {
-    const item = document.createElement('DIV')
+    const item = document.createElement('div')
     item.classList.add('swiper-slide')
     item.style.backgroundImage = `url('${album.imagen}')`
     item.innerHTML = `
@@ -159,14 +197,13 @@ function inicializarCarrusel() {
           <span><a href="#" class="text-white text-3xl hover:text-rose-500"><i class="fa-brands fa-soundcloud"></i></a></span>
         </div>
       </div>
-      
     `
-    tarjeta.appendChild(item)
+    contenedor.appendChild(item)
   })
 
-  // Inicializar Swiper
+  // Configura e inicializa Swiper
   const swiper = new Swiper(".swiper", {
-    modules: [Navigation, Pagination], //Aqui declaramos ambos modulos
+    modules: [Navigation, Pagination],
     effect: "coverflow",
     loop: true,
     grabCursor: true,
@@ -182,7 +219,7 @@ function inicializarCarrusel() {
     pagination: {
       el: ".swiper-pagination",
       type: "bullets",
-      clickable: true
+      clickable: true,
     },
     navigation: {
       nextEl: '.swiper-button-next',
@@ -197,87 +234,77 @@ function inicializarCarrusel() {
       1400: { slidesPerView: 4.5 },
     },
   })
+
   swiper.update()
 }
 
 
-function generarPlaylists(){
-  const tarjeta = document.querySelector<HTMLDivElement>("#playlists")
-  if (!tarjeta) return
+// -------------------------------
+// Funciones para menú móvil
+// -------------------------------
 
-  Playlists.map(playlist => {
-    const item = document.createElement('DIV')
-    item.innerHTML = `
-      <div class="relative w-full h-64 rounded-xl overflow-hidden">
-        <!-- Imagen de fondo -->
-        <img 
-          src="${playlist.portada}" 
-          alt="Portada playlist" 
-          class="absolute inset-0 w-full h-full object-cover" 
-        />
-
-        <!-- Contenido encima -->
-        <div class="relative z-10 flex flex-col justify-end h-full p-4 bg-gradient-to-t from-black/70 to-transparent">
-          <h3 class="text-white font-bold text-3xl mb-2">${playlist.nombre}</h3>
-          <a 
-            href="#" 
-            class="inline-block mt-2 px-4 py-2 rounded-xl text-white text-center font-bold cursor-pointer
-             bg-black/40 backdrop-blur-sm">
-            Escuchar
-          </a>
-        </div>
-      </div>
-    `
-    tarjeta.appendChild(item)
-  })
-}
-
+/**
+ * Controla la apertura y cierre del menú móvil,
+ * bloquea scroll cuando el menú está abierto.
+ * También cierra menú al hacer clic en cualquier enlace dentro.
+ */
 function menuMovil() {
-  const menuToggle : HTMLElement | null = document.getElementById('menu-toggle')
-  const menuClose : HTMLElement | null = document.getElementById('menu-close')
-  const mobileMenu: HTMLElement | null = document.getElementById('mobile-menu')
+  const menuToggle = document.getElementById('menu-toggle')
+  const menuClose = document.getElementById('menu-close')
+  const mobileMenu = document.getElementById('mobile-menu')
+
+  if (!menuToggle || !menuClose || !mobileMenu) return
 
   function abrirMenu() {
-    if(!mobileMenu) return
     mobileMenu.classList.remove('hidden')
     document.body.style.overflow = 'hidden'
-
   }
 
   function cerrarMenu() {
-    if(!mobileMenu) return
     mobileMenu.classList.add('hidden')
     document.body.style.overflow = ''
-
   }
 
-  if(!menuToggle || !menuClose || !mobileMenu) return
   menuToggle.addEventListener('click', abrirMenu)
   menuClose.addEventListener('click', cerrarMenu)
 
-  // Cerrar menú al hacer clic en cualquier enlace del menú móvil (incluye redes sociales)
+  // Cerrar menú al hacer clic en cualquier enlace del menú móvil
   const enlaces = mobileMenu.querySelectorAll('a')
   enlaces.forEach(enlace => {
     enlace.addEventListener('click', cerrarMenu)
   })
 }
 
-function añoActual(){
-  const año = new Date().getFullYear()
+
+// -------------------------------
+// Funciones utilitarias
+// -------------------------------
+
+/**
+ * Actualiza el año actual en el footer.
+ */
+function actualizarAnioActual() {
   const anioElement = document.getElementById("anio")
-  if (anioElement as HTMLElement || null) {
-    if (anioElement) {
-        anioElement.textContent = año.toString()
-    }
+  if (anioElement) {
+    anioElement.textContent = new Date().getFullYear().toString()
   }
 }
 
 
+// -------------------------------
+// Función modo oscuro
+// -------------------------------
 
+/**
+ * Inicializa el modo oscuro.
+ * - Detecta preferencia guardada o la del sistema.
+ * - Cambia icono de luna/sol en botones.
+ * - Guarda preferencia en localStorage.
+ */
 function initDarkMode() {
   const btnsDarkMode = document.querySelectorAll<HTMLButtonElement>('#btn-toggle-dark')
 
-  // Determinar modo inicial
+  // Determina modo inicial (guardado o sistema)
   const savedTheme = localStorage.getItem('theme')
   let isDark = false
 
@@ -286,19 +313,15 @@ function initDarkMode() {
   } else if (savedTheme === 'light') {
     isDark = false
   } else {
-    // No hay preferencia guardada → usa preferencia del sistema
     isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   }
 
-  // Aplicar modo inicial
   setDarkMode(isDark)
 
   btnsDarkMode.forEach(btn => {
     btn.addEventListener('click', () => {
       isDark = !document.body.classList.contains('dark')
       setDarkMode(isDark)
-
-      // Guardar preferencia
       localStorage.setItem('theme', isDark ? 'dark' : 'light')
     })
   })
@@ -321,7 +344,7 @@ function initDarkMode() {
         icon.classList.remove('fa-moon')
         icon.classList.add('fa-sun', 'text-amber-500')
       } else {
-        icon.classList.add('fa-sun', 'text-amber-500')
+        icon.classList.remove('fa-sun', 'text-amber-500')
         icon.classList.add('fa-moon')
       }
     })
