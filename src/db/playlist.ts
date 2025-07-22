@@ -30,4 +30,28 @@ export const Playlists : playlist[] = [
         "url": "#",
         "portada": "./img/polydans.jpg"
     },
+    {  
+        "id": 1,
+        "nombre": "Acid Jazz",
+        "url": "#",
+        "portada": "./img/polydans.jpg"
+    },
+    {  
+        "id": 2,
+        "nombre": "Acid Jazz",
+        "url": "#",
+        "portada": "./img/polydans.jpg"
+    },
+    {  
+        "id": 3,
+        "nombre": "Acid Jazz",
+        "url": "#",
+        "portada": "./img/polydans.jpg"
+    },
+    {  
+        "id": 4,
+        "nombre": "Acid Jazz",
+        "url": "#",
+        "portada": "./img/polydans.jpg"
+    },
 ]
