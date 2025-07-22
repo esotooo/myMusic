@@ -249,19 +249,19 @@ function inicializarCarrusel() {
  * También cierra menú al hacer clic en cualquier enlace dentro.
  */
 function menuMovil() {
-  const menuToggle = document.getElementById('menu-toggle')
-  const menuClose = document.getElementById('menu-close')
-  const mobileMenu = document.getElementById('mobile-menu')
+  const menuToggle : HTMLElement | null = document.getElementById('menu-toggle')
+  const menuClose : HTMLElement | null = document.getElementById('menu-close')
+  const mobileMenu : HTMLElement | null = document.getElementById('mobile-menu')
 
   if (!menuToggle || !menuClose || !mobileMenu) return
 
   function abrirMenu() {
-    mobileMenu.classList.remove('hidden')
+    mobileMenu?.classList.remove('hidden')
     document.body.style.overflow = 'hidden'
   }
 
   function cerrarMenu() {
-    mobileMenu.classList.add('hidden')
+    mobileMenu?.classList.add('hidden')
     document.body.style.overflow = ''
   }
 
