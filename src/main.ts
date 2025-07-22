@@ -6,7 +6,7 @@ import { Navigation, Pagination } from 'swiper/modules'; //Modulos necesarios pa
 
 
 document.addEventListener('DOMContentLoaded', function(){
-  setupMobileMenu()
+  menuMovil()
   generosMostrar()
   scroll()
   resaltar()
@@ -195,6 +195,7 @@ function inicializarCarrusel() {
       1400: { slidesPerView: 4.5 },
     },
   })
+  swiper.update()
 }
 
 
@@ -229,31 +230,30 @@ function generarPlaylists(){
   })
 }
 
-function setupMobileMenu() {
+function menuMovil() {
   const menuToggle : HTMLElement | null = document.getElementById('menu-toggle')
   const menuClose : HTMLElement | null = document.getElementById('menu-close')
   const mobileMenu: HTMLElement | null = document.getElementById('mobile-menu')
 
-  function openMenu() {
+  function abrirMenu() {
     if(!mobileMenu) return
     mobileMenu.classList.remove('hidden')
     document.body.style.overflow = 'hidden'
   }
 
-  function closeMenu() {
+  function cerrarMenu() {
     if(!mobileMenu) return
     mobileMenu.classList.add('hidden')
     document.body.style.overflow = ''
   }
 
   if(!menuToggle || !menuClose || !mobileMenu) return
-  menuToggle.addEventListener('click', openMenu)
-  menuClose.addEventListener('click', closeMenu)
+  menuToggle.addEventListener('click', abrirMenu)
+  menuClose.addEventListener('click', cerrarMenu)
 
   // Cerrar menú al hacer clic en cualquier enlace del menú móvil (incluye redes sociales)
-
   const enlaces = mobileMenu.querySelectorAll('a')
   enlaces.forEach(enlace => {
-    enlace.addEventListener('click', closeMenu)
+    enlace.addEventListener('click', cerrarMenu)
   })
 }
