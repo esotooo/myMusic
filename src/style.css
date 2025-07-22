@@ -109,12 +109,12 @@
 	height: 50%;
 	background: linear-gradient(180deg, #fff0 0, #0008 50px), linear-gradient(180deg, #fff0 , #0009);
 	padding: 15px;
-	padding-top: -20px;
 	left: 0;
 	bottom: -100%;
 	box-sizing: border-box;
 	transition: var(--tst);
 }
+
 @media screen and (max-width: 768px) {
 	.info {
 		height: 60%;
