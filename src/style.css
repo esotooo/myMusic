@@ -214,7 +214,7 @@
 @media screen and (max-width: 768px) {
 	.swiper-button-prev,
 	.swiper-button-next {
-		margin-top: -8rem;
+		display: none;
 	}
 }
 
