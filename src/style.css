@@ -14,7 +14,7 @@
 ============================= */
 
 /* Header fijo */
-.fixed {
+.fixed-header {
     @apply fixed top-0 left-0 right-0 z-50 shadow-2xl transition-all ease-in duration-300 rounded-b-2xl;
 }
 
@@ -22,6 +22,18 @@
 .active {
    @apply text-rose-500 underline;
 }
+
+/* Activar desenfoque al Header al deslizar */
+.blur-header {
+	backdrop-filter: blur(3px);
+	background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco con transparencia */
+	transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+	-webkit-backdrop-filter: blur(10px);
+}	
+
+#mobile-menu {
+	background-color: white !important;
+  }
 
 /* =============================
    Componente: Tarjeta animada
@@ -211,7 +223,7 @@
 	z-index: 3;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 430px) {
 	.swiper-button-prev,
 	.swiper-button-next {
 		display: none;
@@ -224,3 +236,52 @@
 	border-radius: 45%;
 }
 
+
+
+.dark {
+	background-color: #292626;
+	color: #f1f1f1;
+}
+  
+.dark header {
+	background-color: #1e1e1e;
+}
+  
+.dark .navbar a {
+	@apply text-rose-500
+}
+
+.dark .navbar a:hover {
+	color: #f87171; /* mismo rosa */
+}
+  
+.dark footer {
+	background-color: #1e1e1e;
+}
+  
+#albums{
+	background-color: #000;
+}
+
+body,
+header,
+footer,
+section {
+  transition: background-color 1s ease, color 1s ease;
+} 
+
+body.dark #mobile-menu {
+	background-color: #000000 !important;
+	color: #f1f1f1;
+}
+  
+  /* Asegurar que los enlaces y botones dentro cambien color */
+body.dark #mobile-menu a,
+body.dark #mobile-menu button {
+	color: #f1f1f1 !important;
+}	
+  
+body.dark #mobile-menu a:hover,
+body.dark #mobile-menu button:hover {
+	color: #f87171 !important; 
+}

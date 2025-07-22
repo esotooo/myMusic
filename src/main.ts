@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
   inicializarCarrusel()
   generarPlaylists()
   añoActual()
+  initDarkMode()
 })
 
 
@@ -240,12 +241,14 @@ function menuMovil() {
     if(!mobileMenu) return
     mobileMenu.classList.remove('hidden')
     document.body.style.overflow = 'hidden'
+
   }
 
   function cerrarMenu() {
     if(!mobileMenu) return
     mobileMenu.classList.add('hidden')
     document.body.style.overflow = ''
+
   }
 
   if(!menuToggle || !menuClose || !mobileMenu) return
@@ -261,10 +264,66 @@ function menuMovil() {
 
 function añoActual(){
   const año = new Date().getFullYear()
-  const anioElement = document.getElementById("anio");
+  const anioElement = document.getElementById("anio")
   if (anioElement as HTMLElement || null) {
     if (anioElement) {
-        anioElement.textContent = año.toString();
+        anioElement.textContent = año.toString()
     }
+  }
+}
+
+
+
+function initDarkMode() {
+  const btnsDarkMode = document.querySelectorAll<HTMLButtonElement>('#btn-toggle-dark')
+
+  // Determinar modo inicial
+  const savedTheme = localStorage.getItem('theme')
+  let isDark = false
+
+  if (savedTheme === 'dark') {
+    isDark = true
+  } else if (savedTheme === 'light') {
+    isDark = false
+  } else {
+    // No hay preferencia guardada → usa preferencia del sistema
+    isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  }
+
+  // Aplicar modo inicial
+  setDarkMode(isDark)
+
+  btnsDarkMode.forEach(btn => {
+    btn.addEventListener('click', () => {
+      isDark = !document.body.classList.contains('dark')
+      setDarkMode(isDark)
+
+      // Guardar preferencia
+      localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    })
+  })
+
+  function setDarkMode(enable: boolean) {
+    if (enable) {
+      document.body.classList.add('dark')
+    } else {
+      document.body.classList.remove('dark')
+    }
+    updateIcons(enable)
+  }
+
+  function updateIcons(isDark: boolean) {
+    btnsDarkMode.forEach(btn => {
+      const icon = btn.querySelector('i')
+      if (!icon) return
+
+      if (isDark) {
+        icon.classList.remove('fa-moon')
+        icon.classList.add('fa-sun', 'text-amber-500')
+      } else {
+        icon.classList.add('fa-sun', 'text-amber-500')
+        icon.classList.add('fa-moon')
+      }
+    })
   }
 }
