@@ -182,10 +182,12 @@ function generarPlaylists() {
     const item = document.createElement('div')
     item.innerHTML = `
       <div class="relative w-full h-64 rounded-xl overflow-hidden animar-scroll">
-        <img src="${playlist.portada}" alt="Portada playlist" class="absolute inset-0 w-full h-full object-cover" />
+        <img src="${playlist.portada}" alt="Portada playlist" class="absolute inset-0 w-full h-full object-cover object-bottom" />
         <div class="relative z-10 flex flex-col justify-end h-full p-4 bg-gradient-to-t from-black/70 to-transparent">
           <h3 class="text-white font-bold text-3xl mb-2">${playlist.nombre}</h3>
-          <a href="${playlist.url}" class="inline-flex items-center mt-2 px-4 py-2 rounded-xl text-white text-center font-bold cursor-pointer bg-black/40 backdrop-blur-sm hover:bg-black/60">
+          <a href="${playlist.url}" 
+          target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center mt-2 px-4 py-2 rounded-xl text-white text-center font-bold cursor-pointer bg-black/40 backdrop-blur-sm hover:bg-black/60">
             <i class="fa-brands fa-apple mr-2"></i> Escuchar
           </a>
         </div>
@@ -212,6 +214,7 @@ function inicializarCarrusel() {
         <span class="text-3xl font-extrabold text-white m-0">${album.nombre}</span>
         <span class="text-white font-bold italic text-lg m-0">${album.artista}</span>
         <span class="text-rose-500 text-md font-bold m-0">${album.año}</span>
+
       </div>
     `
     contenedor.appendChild(item)
