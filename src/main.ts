@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   generarPlaylists()
   actualizarAnioActual()
   initDarkMode()
+  animarTextos()
 })
 
 
@@ -97,7 +98,7 @@ function generosMostrar() {
     `).join('')
 
     item.innerHTML = `
-      <div class="tarjeta w-full aspect-[3.5/3] lg:aspect-[5/3]">
+      <div class="tarjeta w-full aspect-[3.5/3] lg:aspect-[5/3] animar-scroll">
         <div class="tarjeta__inner w-full h-full relative">
           <div class="tarjeta__cara tarjeta__cara--frontal rounded-2xl absolute inset-0 w-full h-full">
             <div class="frontal--contenido p-15 w-full h-full">
@@ -148,6 +149,27 @@ function animarGeneros() {
     observer.observe(tarjeta)
   })
 }
+/**
+ * Anima el texto de la seccion Generos
+ */
+function animarTextos() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.target.classList.contains('opacity-0')) {
+        entry.target.classList.remove('opacity-0')
+        entry.target.classList.add('animate__animated', 'animate__fadeInUp')
+        observer.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.5 })
+
+  document.querySelectorAll<HTMLElement>('.animar-scroll').forEach(elemento => {
+    elemento.classList.add('opacity-0') // asegúrate que empiecen ocultos
+    observer.observe(elemento)
+  })
+}
+
+
 
 /**
  * Genera las tarjetas para las playlists dinámicamente.
@@ -159,11 +181,11 @@ function generarPlaylists() {
   Playlists.forEach(playlist => {
     const item = document.createElement('div')
     item.innerHTML = `
-      <div class="relative w-full h-64 rounded-xl overflow-hidden">
+      <div class="relative w-full h-64 rounded-xl overflow-hidden animar-scroll">
         <img src="${playlist.portada}" alt="Portada playlist" class="absolute inset-0 w-full h-full object-cover" />
         <div class="relative z-10 flex flex-col justify-end h-full p-4 bg-gradient-to-t from-black/70 to-transparent">
           <h3 class="text-white font-bold text-3xl mb-2">${playlist.nombre}</h3>
-          <a href="#" class="inline-block mt-2 px-4 py-2 rounded-xl text-white text-center font-bold cursor-pointer bg-black/40 backdrop-blur-sm">
+          <a href="#" class="inline-block mt-2 px-4 py-2 rounded-xl text-white text-center font-bold cursor-pointer bg-black/40 backdrop-blur-sm hover:bg-black/60">
             Escuchar
           </a>
         </div>
