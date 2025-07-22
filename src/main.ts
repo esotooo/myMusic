@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
   animarGeneros()
   inicializarCarrusel()
   generarPlaylists()
+  añoActual()
 })
 
 
@@ -256,4 +257,14 @@ function menuMovil() {
   enlaces.forEach(enlace => {
     enlace.addEventListener('click', cerrarMenu)
   })
+}
+
+function añoActual(){
+  const año = new Date().getFullYear()
+  const anioElement = document.getElementById("anio");
+  if (anioElement as HTMLElement || null) {
+    if (anioElement) {
+        anioElement.textContent = año.toString();
+    }
+  }
 }

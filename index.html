@@ -120,10 +120,17 @@
     </main>
 
     <footer class="bg-rose-500 py-10"> 
-      <div class="mx-10">
-        <h1>Todos los derechos reservados</h1>
+      <div class="mx-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <p class="font-bold text-white text-xl text-center md:text-left">
+          &copy; <span id="anio"></span> My Music By Edwin. Todos los derechos reservados.
+        </p>
+        <nav class="text-3xl text-white flex justify-center gap-4">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        </nav>
       </div>
     </footer>
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="/src/main.ts"></script>
   </body>

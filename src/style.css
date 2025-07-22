@@ -211,6 +211,13 @@
 	z-index: 3;
 }
 
+@media screen and (max-width: 768px) {
+	.swiper-button-prev,
+	.swiper-button-next {
+		margin-top: -8rem;
+	}
+}
+
 .swiper-button-prev:hover,
 .swiper-button-next:hover{
 	padding: 2.5rem;

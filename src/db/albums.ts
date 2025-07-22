@@ -105,4 +105,11 @@ export const Albums : Album[] = [
         "artista": "The Beatles",
         "imagen": "./img/rubber.png"
     },
+    {
+        "id": 15,
+        "nombre": "Casiopeia",
+        "año": "1979",
+        "artista": "Casiopeia",
+        "imagen": "./img/casio.jpg"
+    },
 ]
