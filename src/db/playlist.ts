@@ -5,29 +5,29 @@ type playlist = {
     portada: string
 }
 
-export const playlists : playlist[] = [
+export const Playlists : playlist[] = [
     {  
         "id": 1,
         "nombre": "Acid Jazz",
         "url": "#",
-        "portada": "#"
+        "portada": "./img/polydans.jpg"
     },
     {  
-        "id": 1,
+        "id": 2,
         "nombre": "Acid Jazz",
         "url": "#",
-        "portada": "#"
+        "portada": "./img/polydans.jpg"
     },
     {  
-        "id": 1,
+        "id": 3,
         "nombre": "Acid Jazz",
         "url": "#",
-        "portada": "#"
+        "portada": "./img/polydans.jpg"
     },
     {  
-        "id": 1,
+        "id": 4,
         "nombre": "Acid Jazz",
         "url": "#",
-        "portada": "#"
+        "portada": "./img/polydans.jpg"
     },
 ]

@@ -21,23 +21,51 @@
   <body>
 
     <header id="header" class="header bg-white fixed py-7 shadow-md z-50 w-full">
-      <div class="flex flex-col md:flex-row items-center justify-between mx-4 px-2">
-        <div>
-          <a href="#Inicio" class="text-5xl font-bold flex flex-col">
-            Sounds<span class="text-sm text-rose-500 text-right -mt-2">By Edwin</span>
+      <div class="flex flex-col md:flex-row items-center justify-between mx-10 px-2">
+        <div class="flex items-center">
+          <!-- Título -->
+          <a href="#Inicio" class="text-5xl font-bold flex flex-col leading-tight">
+            Sounds
+            <span class="text-sm text-rose-500 -mt-2">By Edwin</span>
           </a>
+    
+          <!-- Botón abrir menú (solo visible en móvil), a la derecha del título -->
+          <button id="menu-toggle" class="md:hidden text-3xl ml-30 leading-none">
+            ☰
+          </button>
         </div>
-        <nav class="flex flex-col md:flex-row gap-6 text-xl font-bold flex-1 justify-center navbar">
+    
+        <!-- Menú móvil (oculto inicialmente) -->
+        <nav id="mobile-menu" class="fixed inset-0 bg-white flex flex-col items-start justify-start gap-8 text-3xl font-bold text-left z-50 hidden pt-8 pl-8">
+          <!-- Botón cerrar -->
+          <button id="menu-close" class="absolute top-6 right-6 text-5xl font-bold hover:text-rose-500">&times;</button>
+    
+          <a href="#Generos" class="hover:text-rose-500">Géneros</a>
+          <a href="#Albums" class="hover:text-rose-500">Albums</a>
+          <a href="#Playlists" class="hover:text-rose-500">Playlists</a>
+    
+          <!-- Redes sociales dentro del menú -->
+          <div class="flex gap-6 text-4xl mt-8">
+            <a href="#" class="hover:text-rose-500"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="hover:text-rose-500"><i class="fa-brands fa-facebook"></i></a>
+          </div>
+        </nav>
+    
+        <!-- Menú desktop (visible en md+) -->
+        <nav class="hidden md:flex gap-6 text-xl font-bold justify-center navbar md:flex-row">
           <a href="#Generos" class="hover:text-rose-500">Géneros</a>
           <a href="#Albums" class="hover:text-rose-500">Albums</a>
           <a href="#Playlists" class="hover:text-rose-500">Playlists</a>
         </nav>
-        <nav class="flex gap-6 text-3xl">
+    
+        <!-- Redes sociales desktop -->
+        <nav class="hidden md:flex gap-6 text-3xl">
           <a href="#" class="hover:text-rose-500"><i class="fa-brands fa-instagram"></i></a>
           <a href="#" class="hover:text-rose-500"><i class="fa-brands fa-facebook"></i></a>
         </nav>
       </div>
     </header>
+    
     
 
     <main class="contenido mt-26">
@@ -81,9 +109,9 @@
       </section>
       
       <!--Sección de Playlists-->
-      <section id="Playlists" class="mt-10 scroll-mt-28">
+      <section id="Playlists" class="mt-10 scroll-mt-42">
         <h1 class="text-4xl font-bold text-center text-rose-500">Playlists</h1>
-        <div id="playlists">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-10 mx-10 gap-4 my-10" id="playlists">
           <!--Aqui se generá el DIV con cada Playlist-->
         </div>
       </section>

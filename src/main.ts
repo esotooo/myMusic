@@ -1,15 +1,18 @@
 import { generos } from "./db/generos";
 import { Albums } from "./db/albums";
+import { Playlists } from "./db/playlist";
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules'; //Modulos necesarios para que navigation y pagination funcionen
 
 
 document.addEventListener('DOMContentLoaded', function(){
+  setupMobileMenu()
   generosMostrar()
   scroll()
   resaltar()
   animarGeneros()
   inicializarCarrusel()
+  generarPlaylists()
 })
 
 
@@ -194,11 +197,59 @@ function inicializarCarrusel() {
   })
 }
 
-function
 
+function generarPlaylists(){
+  const tarjeta = document.querySelector<HTMLDivElement>("#playlists")
+  if (!tarjeta) return
 
+  Playlists.map(playlist => {
+    const item = document.createElement('DIV')
+    item.innerHTML = `
+      <div class="relative w-full h-64 rounded-xl overflow-hidden">
+        <!-- Imagen de fondo -->
+        <img 
+          src="${playlist.portada}" 
+          alt="Portada playlist" 
+          class="absolute inset-0 w-full h-full object-cover" 
+        />
 
+        <!-- Contenido encima -->
+        <div class="relative z-10 flex flex-col justify-end h-full p-4 bg-gradient-to-t from-black/70 to-transparent">
+          <h3 class="text-white font-bold text-3xl mb-2">${playlist.nombre}</h3>
+          <a 
+            href="#" 
+            class="inline-block mt-2 px-4 py-2 rounded-xl text-white text-center font-bold cursor-pointer
+             bg-black/40 backdrop-blur-sm">
+            Escuchar
+          </a>
+        </div>
+      </div>
+    `
+    tarjeta.appendChild(item)
+  })
+}
 
+function setupMobileMenu() {
+  const menuToggle = document.getElementById('menu-toggle')
+  const menuClose = document.getElementById('menu-close')
+  const mobileMenu = document.getElementById('mobile-menu')
 
+  function openMenu() {
+    mobileMenu.classList.remove('hidden')
+    document.body.style.overflow = 'hidden'
+  }
 
+  function closeMenu() {
+    mobileMenu.classList.add('hidden')
+    document.body.style.overflow = ''
+  }
 
+  menuToggle.addEventListener('click', openMenu)
+  menuClose.addEventListener('click', closeMenu)
+
+  // Cerrar menú al hacer clic en cualquier enlace del menú móvil (incluye redes sociales)
+  const enlaces = mobileMenu.querySelectorAll('a')
+  enlaces.forEach(enlace => {
+    enlace.addEventListener('click', closeMenu)
+  })
+}
